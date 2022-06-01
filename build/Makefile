@@ -2,6 +2,7 @@ all:main
 
 main:main.o error_me.o
 	gcc -o ../main main.o error_me.o
+	del *.o
 
 main.o:../code/sources/main.c
 	gcc -c ../code/sources/main.c -o main.o
