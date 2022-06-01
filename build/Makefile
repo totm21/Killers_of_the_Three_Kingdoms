@@ -1,7 +1,5 @@
 all:main
 
-CFLAGS=-I../code/headers
-
 main:main.o error_me.o
 	gcc -o ../main main.o error_me.o
 
@@ -11,3 +9,7 @@ main.o:../code/sources/main.c
 error_me.o:../code/sources/error_me.c ../code/headers/error_me.h
 	gcc -c ../code/sources/error_me.c -o error_me.o
 
+clean:
+	del *.o
+
+.PHONY:clean
