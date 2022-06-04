@@ -5,6 +5,7 @@
 
 #include<stdio.h>
 #include<stdbool.h>
+#include"mark.h"
 
 
 
@@ -16,7 +17,7 @@ bool creat_error_log();
 
 
 //将str写入log
-bool write_error_log(char* str,int line,const char* function,char* file);
+bool write_error_log(char* str,char rank,int line,const char* function,char* file);
 
 /*
     __LINE__         当前语句所在的行号, 以10进制整数标注.

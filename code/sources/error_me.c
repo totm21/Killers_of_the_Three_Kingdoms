@@ -14,9 +14,26 @@ bool creat_error_log()
     return true;
 }
 
-bool write_error_log(char* str,int line,const char * function,char* file)
+bool write_error_log(char* str,char rank,int line,const char * function,char* file)
 {
-    if(fprintf(file_name_error_log,"%s %s %d : %s\n",file,function,line,str)<0)
+    //文件打开检测
+    if(file_name_error_log==NULL)
+    {
+        creat_error_log();
+    }
+    
+    char ranks[20];
+    if(rank==ERROR_ERROR_ME)
+    {
+        strcpy(ranks,"error ");
+    }
+    else if(rank==WARN_ERROR_ME)
+    {
+        strcpy(ranks,"warn ");
+    }
+
+
+    if(fprintf(file_name_error_log,"%s  %s %s %d : %s\n",ranks,file,function,line,str)<0)
     {
         return false;
     }
