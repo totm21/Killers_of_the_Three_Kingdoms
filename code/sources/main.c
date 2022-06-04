@@ -5,6 +5,11 @@
 
 //程序开始位置
 
+bool co(void* a,void* b)
+{
+    (*(int *)b)=(*(int*)a);
+    return true;
+}
 
 int main()
 {
@@ -12,15 +17,33 @@ int main()
     creat_error_log();
 
     //此处为程序测试
-
-    
-
-    char str[50];
-    for(int i=0;i<5;i++)
+    int arr[50];
+    for(int i=0;i<50;i++)
     {
-        scanf("%s",str);
-        write_error_log(str,__LINE__,__FUNCTION__,__FILE__);
+        arr[i]=i;
     }
+
+    vector vec;
+    vector_init(&vec,2,sizeof(int));
+    for(int i=0;i<50;i++)
+    {
+        if(i<10)
+        {
+            vector_pop(&vec);
+        }
+        else
+        {
+            vector_push_back(&vec,arr+i,co);
+        }
+        
+        
+    }
+    for(int i=0;i<vec.current_number_of_elements;i++)
+    {
+        printf("%d ",*(int*)vector_get_index(&vec,i));
+    }
+    printf("\n");
+    printf("%d %d\n",vec.total_number_of_elements,vec.current_number_of_elements);
 
 
     //程序最后关闭日志文件

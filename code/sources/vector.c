@@ -24,8 +24,6 @@ int vector_init(vector* vector_,int len,int size)
 
 int vector_expand(vector* vector_)
 {
-
-    
     if(vector_->total_number_of_elements==0)
     {
         //第一种   原内存分配失败   
@@ -57,7 +55,7 @@ int vector_expand(vector* vector_)
             {
                 vector_->data=temporary;
             }
-            vector_->total_number_of_elements=vector_->total_number_of_elements*vector_->type_size*2;
+            vector_->total_number_of_elements=vector_->total_number_of_elements*2;
         }
     }
     return vector_->total_number_of_elements;
@@ -79,7 +77,7 @@ int vector_push_back(vector* vector_,void* data,bool (*copy_)(void* scoure,void*
 
 
     //尝试压入容器
-    if(copy_(vector_->data+(vector_->type_size*vector_->current_number_of_elements),data))
+    if(copy_(data,vector_->data+(vector_->type_size*vector_->current_number_of_elements)))
     {
         vector_->current_number_of_elements++;
     }
@@ -110,3 +108,10 @@ void* vector_get_index(vector* vector_,int index)
     return vector_->data+(vector_->type_size*index);
 }
 
+
+
+void vector_free(vector* vector_)
+{
+    free(vector_->data);
+    return ;
+}

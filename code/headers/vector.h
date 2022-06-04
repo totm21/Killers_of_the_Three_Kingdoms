@@ -4,7 +4,6 @@
 #define VECTOR
 
 
-
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
@@ -19,7 +18,16 @@ typedef struct VECTOR
     int current_number_of_elements; //当前元素个数
 }vector;
 
-//暂时只完成了类似栈的操作   主要是想做一个可以随机访问的东西    
+/*
+
+暂时只完成了类似栈的操作   主要是想做一个可以随机访问的东西    
+
+基础测试完成  暂时未发现问题
+                    author:程智     date:2022/6/5
+
+
+*/
+
 
 
 //初始化vector  其中数量为len   单个数据长度为size  返回总长度
@@ -36,6 +44,9 @@ int vector_pop(vector* vector_);
 
 //按照下标访问具体数据 返回具体的数据指针   失败返回NULL
 void* vector_get_index(vector* vector_,int index);
+
+//释放其内部空间  data  返回data
+void vector_free(vector* vector_);
 
 
 #endif
