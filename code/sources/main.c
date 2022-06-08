@@ -2,6 +2,7 @@
 #include<windows.h>
 #include"../headers/error_me.h"
 #include"../headers/vector.h"
+#include"../headers/data_structure.h"
 
 //程序开始位置
 
@@ -18,8 +19,12 @@ int main()
 
     //此处为程序测试
 
-    //ceshi
+    skill* ski=(skill*)malloc(sizeof(skill));
+    skill_init(ski,"chengzhi",1);
+    printf("%s\n",ski->describe);
 
+
+    
 
     //程序最后关闭日志文件
     close_error_log();
