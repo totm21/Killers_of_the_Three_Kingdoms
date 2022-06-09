@@ -36,7 +36,7 @@ int vector_expand(vector* vector_)
         }
         else
         {
-             write_error_log("vector expand malloc fail ",ERROR_ERROR_ME,__LINE__,__FUNCTION__,__FILE__);
+            write_error_log("vector expand malloc fail ",ERROR_ERROR_ME,__LINE__,__FUNCTION__,__FILE__);
         }
     }
     else
@@ -62,6 +62,33 @@ int vector_expand(vector* vector_)
 }
 
 
+
+int vec_expand_len(vector* vector_,int len)
+{
+    if(len<=vector_->total_number_of_elements)
+    {
+        write_error_log("vector expand_len malloc fail : Space is enough ",WARN_ERROR_ME,__LINE__,__FUNCTION__,__FILE__);
+    }
+    else
+    {
+        void* temporary=realloc(vector_->data,len*vector_->type_size);
+        
+        if(temporary==NULL)
+        {
+            write_error_log("vector expand_len realloc fail ",ERROR_ERROR_ME,__LINE__,__FUNCTION__,__FILE__);
+        }
+        else
+        {
+            if(vector_->data!=temporary)
+            {
+                vector_->data=temporary;
+            }
+            vector_->total_number_of_elements=len;
+        }
+    }
+}
+
+
 int vector_push_back(vector* vector_,void* data,bool (*copy_)(void* scoure,void* goal))
 {
     //内部空间不够  空间扩容
@@ -81,7 +108,40 @@ int vector_push_back(vector* vector_,void* data,bool (*copy_)(void* scoure,void*
     {
         vector_->current_number_of_elements++;
     }
+    else
+    {
+        write_error_log("vector push_back to expend fail : copy_ mistake ",ERROR_ERROR_ME,__LINE__,__FUNCTION__,__FILE__);
+    }
     
+    return vector_->current_number_of_elements;
+}
+
+
+int vector_push_backs(vector*  vector_,void* data,void* number,bool (*copy)(void*score,void* goal))
+{
+     //内部空间不够  空间扩容
+    if(vector_->total_number_of_elements<vector_->current_number_of_elements+number)
+    {
+        vector_expand_len(vector_,vector_->current_number_of_elements+number);
+        if(vector_->total_number_of_elements==vector_->current_number_of_elements)
+        {
+            write_error_log("vector push_backs to expend fail ",ERROR_ERROR_ME,__LINE__,__FUNCTION__,__FILE__);
+            return FAIL_CODE;
+        }
+    }
+    for(int i=0;i<number;i++)
+    {
+        if(copy_(data+(vector_->type_size*i),vector_->data+(vector_->type_size*vector_->current_number_of_elements)))
+        {
+            vector_->current_number_of_elements++;
+        }
+        else
+        {
+            write_error_log("vector push_backs to expend fail : copy_ mistake ",ERROR_ERROR_ME,__LINE__,__FUNCTION__,__FILE__);
+        }
+
+    }   
+
     return vector_->current_number_of_elements;
 }
 

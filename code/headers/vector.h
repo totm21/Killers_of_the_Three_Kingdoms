@@ -36,8 +36,14 @@ int vector_init(vector* vector_,int len,int size);
 //扩容  若总长度不为0 则*2   若为0 则总长度扩为1  返回总长度
 int vector_expand(vector* vector_);
 
+//定长扩容  由原长度扩展到新的长度
+int vec_expand_len(vector* vector_,int len); 
+
 //尾部插入新的数据   返回当前元素个数    此处需提供自定义类型的拷贝函数  来进行复制操作
 int vector_push_back(vector* vector_,void* data,bool (*copy_)(void* scoure,void* goal));
+
+//尾部插入多个新的数据  返回当前元素个数  此处需提供自定义类型的拷贝函数
+int vector_push_backs(vector*  vector_,void* data,void* number,bool (*copy)(void*score,void* goal));
 
 //尾部删除数据  返回删除后的数据数量  失败返回FAIL_CODE
 int vector_pop(vector* vector_);
