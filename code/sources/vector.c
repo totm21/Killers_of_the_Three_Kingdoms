@@ -63,7 +63,7 @@ int vector_expand(vector* vector_)
 
 
 
-int vec_expand_len(vector* vector_,int len)
+int vector_expand_len(vector* vector_,int len)
 {
     if(len<=vector_->total_number_of_elements)
     {
@@ -117,7 +117,7 @@ int vector_push_back(vector* vector_,void* data,bool (*copy_)(void* scoure,void*
 }
 
 
-int vector_push_backs(vector*  vector_,void* data,void* number,bool (*copy)(void*score,void* goal))
+int vector_push_backs(vector*  vector_,void* data,int number,bool (*copy_)(void*score,void* goal))
 {
      //内部空间不够  空间扩容
     if(vector_->total_number_of_elements<vector_->current_number_of_elements+number)
@@ -167,6 +167,29 @@ void* vector_get_index(vector* vector_,int index)
     }
     return vector_->data+(vector_->type_size*index);
 }
+
+void vector_print(vector* vector_,FILE* file,bool (*print_)(void* data,FILE* file))
+{
+    if(file==NULL)
+    {
+        printf("The type size of the vector is : %d \n",vector_->type_size);
+        printf("The total space of the vector is : %d \n",vector_->total_number_of_elements);
+        printf("The used space of the vector is : %d \n",vector_->current_number_of_elements);
+        
+    }
+    else
+    {
+        
+    }
+
+    for(int i=0;i<vector_->current_number_of_elements;i++)
+    {
+        print_(vector_->data+(vector_->type_size*i),file);
+    }
+    return ;
+}
+
+
 
 
 

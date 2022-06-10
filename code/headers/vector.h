@@ -37,19 +37,22 @@ int vector_init(vector* vector_,int len,int size);
 int vector_expand(vector* vector_);
 
 //定长扩容  由原长度扩展到新的长度
-int vec_expand_len(vector* vector_,int len); 
+int vector_expand_len(vector* vector_,int len); 
 
 //尾部插入新的数据   返回当前元素个数    此处需提供自定义类型的拷贝函数  来进行复制操作
 int vector_push_back(vector* vector_,void* data,bool (*copy_)(void* scoure,void* goal));
 
 //尾部插入多个新的数据  返回当前元素个数  此处需提供自定义类型的拷贝函数
-int vector_push_backs(vector*  vector_,void* data,void* number,bool (*copy)(void*score,void* goal));
+int vector_push_backs(vector*  vector_,void* data,int number,bool (*copy_)(void* score,void* goal));
 
 //尾部删除数据  返回删除后的数据数量  失败返回FAIL_CODE
 int vector_pop(vector* vector_);
 
 //按照下标访问具体数据 返回具体的数据指针   失败返回NULL
 void* vector_get_index(vector* vector_,int index);
+
+//输出内部数据情况————日志/控制台
+void vector_print(vector* vector_,FILE* file,bool (*print_)(void* data,FILE* file));
 
 //释放其内部空间  data  返回data
 void vector_free(vector* vector_);

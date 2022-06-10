@@ -6,11 +6,13 @@
 
 //程序开始位置
 
-bool co(void* a,void* b)
+bool copy_int(void* a,void* b)
 {
     (*(int *)b)=(*(int*)a);
     return true;
 }
+
+
 
 int main()
 {
@@ -18,6 +20,26 @@ int main()
     creat_error_log();
 
     //此处为程序测试
+
+    vector vec;
+    int arr[10]={0,1,2,3,4,5,6,7,8,9};
+    vector_init(&vec,1,sizeof(int));
+    vector_push_back(&vec,(void*)arr,copy_int);
+    for(int i=0;i<vec.current_number_of_elements;i++)
+    {
+        printf("%d ",*((int*)vector_get_index(&vec,i)));
+    }
+    printf("\n");
+    
+    vector_push_backs(&vec,(void*)(arr+1),9,copy_int);
+
+    for(int i=0;i<vec.current_number_of_elements;i++)
+    {
+        printf("%d ",*((int*)vector_get_index(&vec,i)));
+    }
+    printf("\n");
+
+
 
     skill* ski=(skill*)malloc(sizeof(skill));
     skill_init(ski,"chengzhi",1);

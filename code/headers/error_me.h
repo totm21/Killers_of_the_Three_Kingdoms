@@ -17,8 +17,32 @@ FILE* file_name_error_log;
 bool creat_error_log();
 
 
-//将str写入log
+//将str 以及对应数据 写入log
 bool write_error_log(char* str,char rank,int line,const char* function,char* file);
+
+//将int写入log————安全版
+bool write_log_only_int_safety(int data);
+
+//将char*写入log————安全版
+bool write_log_only_char__safety(char* str);
+
+//将char写入————安全版
+bool write_log_only_char_safety(char char_);
+
+
+//文件打开检测  不存在则打开
+bool open_error_log();
+
+
+
+//将int写入log
+bool write_log_only_int(int data);
+
+//将char*写入log
+bool write_log_only_char_(char* str);
+
+//将char写入
+bool write_log_only_char(char char_);
 
 /*
     __LINE__         当前语句所在的行号, 以10进制整数标注.
