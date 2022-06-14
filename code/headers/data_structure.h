@@ -1,6 +1,7 @@
 
 #ifndef DATA_STRUCTURE
 #define DATA_STRUCTURE
+#include"error_me.h"
 #include"vector.h"
 #include<string.h>
 
@@ -44,7 +45,8 @@ skill* skill_init(skill* skill_,char* describe,int effect);
 //hero初始化
 hero* hero_init(hero* hero_,char* name,char HP,char nation,skill* skills,int number);
 
-
+//hero释放函数
+bool hero_free(hero* hero_);
 
 
 

@@ -20,3 +20,19 @@ hero* hero_init(hero* hero_,char* name,char HP,char nation,skill* skills,int num
     hero_->HP=HP;
     hero_->nation=nation;
 }
+
+
+bool hero_free(hero* hero_)
+{
+    if(hero_==NULL)
+    {
+        
+        return false;
+    }
+    free(hero_->name);
+
+    vector_free(hero_->vector_skill);
+    free(hero_->vector_skill);
+    return true;
+
+}

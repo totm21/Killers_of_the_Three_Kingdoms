@@ -94,6 +94,7 @@ bool open_error_log()
     if(file_name_error_log==NULL)
     {
         creat_error_log();
+        return false;
     }
     return true;
 }

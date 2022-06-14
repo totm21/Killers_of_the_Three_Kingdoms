@@ -51,7 +51,7 @@ int vector_pop(vector* vector_);
 //按照下标访问具体数据 返回具体的数据指针   失败返回NULL
 void* vector_get_index(vector* vector_,int index);
 
-//输出内部数据情况————日志/控制台
+//输出内部数据情况————日志/控制台  (需提供对应的打印函数)
 void vector_print(vector* vector_,FILE* file,bool (*print_)(void* data,FILE* file));
 
 //释放其内部空间  data  返回data

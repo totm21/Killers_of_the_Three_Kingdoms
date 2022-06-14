@@ -175,17 +175,28 @@ void vector_print(vector* vector_,FILE* file,bool (*print_)(void* data,FILE* fil
         printf("The type size of the vector is : %d \n",vector_->type_size);
         printf("The total space of the vector is : %d \n",vector_->total_number_of_elements);
         printf("The used space of the vector is : %d \n",vector_->current_number_of_elements);
-        
     }
     else
     {
-        
+        fprintf(file,"The type size of the vector is : %d \n",vector_->type_size);
+        fprintf(file,"The total space of the vector is : %d \n",vector_->total_number_of_elements);
+        fprintf(file,"The used space of the vector is : %d \n",vector_->current_number_of_elements);
     }
 
     for(int i=0;i<vector_->current_number_of_elements;i++)
     {
         print_(vector_->data+(vector_->type_size*i),file);
     }
+    
+    if(file==NULL)
+    {
+        printf("\n");
+    }
+    else
+    {
+        fprintf(file,"\n");
+    }
+
     return ;
 }
 
