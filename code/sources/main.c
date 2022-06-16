@@ -6,17 +6,24 @@
 
 //程序开始位置
 
-bool copy_int(void* a,void* b)
+bool copy_skill(void* a,void* b)
 {
-    (*(int *)b)=(*(int*)a);
+    skill* aa=(skill*)a;
+    skill* bb=(skill*)b;
+    bb->describe=aa->describe;
+    bb->effect=aa->effect;
+    
     return true;
 }
 
 bool print_(void* data,FILE* file)
 {
-    printf("%d ",*((int*)data));
+    //printf("%d ",*((int*)data));
+    skill* skill_=(skill*)data;
+    printf("de : %s \neff : %d\n",skill_->describe,skill_->effect);
     return 0;
 }
+ 
 
 
 int main()
@@ -29,30 +36,7 @@ int main()
     //此处为程序测试
 
     vector vec;
-    int arr[10]={0,1,2,3,4,5,6,7,8,9};
-    vector_init(&vec,1,sizeof(int));
-    vector_push_back(&vec,(void*)arr,copy_int);
-    vector_print(&vec,NULL,print_);
-    
-
-    /*
-    for(int i=0;i<vec.current_number_of_elements;i++)
-    {
-        printf("%d ",*((int*)vector_get_index(&vec,i)));
-    }
-    printf("\n");
-    */
-
-    vector_push_backs(&vec,(void*)(arr+1),9,copy_int);
-    vector_print(&vec,NULL,print_);
-    
-    /*
-    for(int i=0;i<vec.current_number_of_elements;i++)
-    {
-        printf("%d ",*((int*)vector_get_index(&vec,i)));
-    }
-    */
-    printf("\n");
+    vector_init(&vec,1,sizeof(skill));
 
 
 
@@ -61,6 +45,11 @@ int main()
     printf("%s\n",ski->describe);
 
 
+    vector_push_back(&vec,(void*)ski,copy_skill);
+
+    vector_print(&vec,NULL,print_);
+
+    vector_free(&vec,skill_free_void);
     
 
     //程序最后关闭日志文件

@@ -204,8 +204,30 @@ void vector_print(vector* vector_,FILE* file,bool (*print_)(void* data,FILE* fil
 
 
 
-void vector_free(vector* vector_)
+void vector_free(vector* vector_,bool (*delete_)(void* data))
 {
-    free(vector_->data);
+    if(vector_==NULL)
+    {
+        write_error_log("vector_free vector_ is NULL ",WARN_ERROR_ME,__LINE__,__FUNCTION__,__FILE__);
+        return ;
+    }
+    
+    //data 释放策略
+    if(vector_->data==NULL)
+    {
+        write_error_log("vector_free vector_->data is NULL ",WARN_ERROR_ME,__LINE__,__FUNCTION__,__FILE__);
+    }
+    else
+    {
+        if(delete_!=NULL)
+        {
+            for(int i=0;i<vector_->current_number_of_elements;i++)
+            {
+                delete_(vector_->data+(vector_->type_size*i));
+            }
+        }
+        free(vector_->data);
+        vector_->data=NULL;
+    }
     return ;
 }

@@ -33,9 +33,11 @@ typedef struct HERO
 //skill初始化   
 skill* skill_init(skill* skill_,char* describe,int effect);
 
+//skill释放函数————传入参数为skill版
+bool skill_free_skill(skill* skill_);
 
-
-
+//skill释放函数————传入参数为void版
+bool skill_free_void(void* skill_);
 
 
 

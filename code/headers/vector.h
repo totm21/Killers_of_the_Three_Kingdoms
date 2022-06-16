@@ -55,7 +55,7 @@ void* vector_get_index(vector* vector_,int index);
 void vector_print(vector* vector_,FILE* file,bool (*print_)(void* data,FILE* file));
 
 //释放其内部空间  data  返回data
-void vector_free(vector* vector_);
+void vector_free(vector* vector_,bool (*delete_)(void* data));
 
 
 #endif
